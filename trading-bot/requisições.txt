@@ -1,0 +1,15 @@
+{
+    "login": "usuario123",
+    "password": "senhaSegura",
+    "binanceApiKey": "minhaApiKey",
+    "binanceSecretKey": "minhaSecretKey",
+    "saldoInicio": 1000.50
+}
+
+
+
+{
+    "lossPercent": 2.5,
+    "profitPercent": 5.0,
+    "quantityPerOrder": 10
+}
