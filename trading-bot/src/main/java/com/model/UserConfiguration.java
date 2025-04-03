@@ -1,21 +1,14 @@
 package com.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
-
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Data
 @Entity
-@Table(name = "UserConfiguration")
+@Table(name = "user_configurations")
 public class UserConfiguration {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,8 +23,7 @@ public class UserConfiguration {
     private Double quantityPerOrder;
 
     @ManyToOne
-    @JoinColumn(name = "user_id") // Foreign key column name
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 }
-  
-

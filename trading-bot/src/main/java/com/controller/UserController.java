@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,43 +47,50 @@ public class UserController {
     }
 
     @PostMapping("{id}/configuration")
-    public ResponseEntity<User> associteConfiguration(@PathVariable("id") Integer id, @RequestBody UserConfiguration configuration) {
-        Optional<User> optionalUser = this.userRepository.findById(id);
+public ResponseEntity<User> associteConfiguration(@PathVariable("id") Integer id, @RequestBody UserConfiguration configuration) {
+    Optional<User> optionalUser = userRepository.findById(id);
 
-        if (optionalUser.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        //Cria a configuração na base de dados
-        this.userConfigurationRepository.save(configuration);
-
-        //Associa a configuração ao usuario
-        User user = optionalUser.get();
-        user.getConfigurations().add(configuration);
-        userRepository.save(user);
-
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-
+    if (optionalUser.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("{id}/tracking-ticker")
-    public ResponseEntity<User> associateTicker(@PathVariable("id") Integer id, @RequestBody UserTrackingTicker ticker) {
-        Optional<User> optionalUser = this.userRepository.findById(id);
-
-        if (optionalUser.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        //Cria a configuração na base de dados
-        this.userTrackingTickerRepository.save(ticker);
-
-        //Associa a configuração ao usuario
-        User user = optionalUser.get();
-        user.getTrackingTickers().add(ticker);
-        userRepository.save(user);
-
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-
+    User user = optionalUser.get();
+    
+    // Garante que a lista não seja nula
+    if (user.getConfigurations() == null) {
+        user.setConfigurations(new ArrayList<>());
     }
 
+    // Associa e salva
+    configuration.setUser(user);
+    user.getConfigurations().add(configuration);
+    userConfigurationRepository.save(configuration);
+    userRepository.save(user);
+
+    return new ResponseEntity<>(user, HttpStatus.CREATED);
+}
+
+@PostMapping("{id}/tracking-ticker")
+public ResponseEntity<User> associateTicker(@PathVariable("id") Integer id, @RequestBody UserTrackingTicker ticker) {
+    Optional<User> optionalUser = userRepository.findById(id);
+
+    if (optionalUser.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    User user = optionalUser.get();
+
+    // Garante que a lista não seja nula
+    if (user.getTrackingTickers() == null) {
+        user.setTrackingTickers(new ArrayList<>());
+    }
+
+    // Associa e salva
+    ticker.setUser(user);
+    user.getTrackingTickers().add(ticker);
+    userTrackingTickerRepository.save(ticker);
+    userRepository.save(user);
+
+    return new ResponseEntity<>(user, HttpStatus.CREATED);
+}
 }
