@@ -10,31 +10,35 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
+    @Column
     private String login;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
-    @Column(nullable = false)
+    @Column
     private String binanceApiKey;
 
-    @Column(nullable = false)
+    @Column
     private String binanceSecretKey;
 
     @Column
     private Double saldoInicio;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<UserConfiguration> configurations = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private List<UserConfiguration> configurations;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<UserTrackingTicker> trackingTickers = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private List<UserTrackingTicker> trackingTickers;
+
+    @OneToMany
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private List<UserOrderReport> orderReports;
+
 }

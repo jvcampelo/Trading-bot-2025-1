@@ -1,5 +1,9 @@
 package com.response;
 
-public class TickerResponse {
+import lombok.Data;
 
+@Data
+public class TickerResponse {
+  private String symbol;
+  private double lastPrice;
 }
