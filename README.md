@@ -112,3 +112,8 @@ Interfaces que estendem `JpaRepository` para comunicação com o banco:
 ---
 ## 8. Url da api rodando na nuvem com swagger
  - https://tradebot-cjbef9c8e9ebcwhz.canadacentral-01.azurewebsites.net/swagger-ui/index.html
+
+## 9. integrantes 
+ - João Campelo
+ - Thalles Diepes
+ - Matheus Norcia
