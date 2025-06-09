@@ -46,6 +46,6 @@ jobs:
         working-directory: ./trading-bot
         run: |
           docker-compose build
-          docker tag trade-bot2 tradebot.azurecr.io/trade-bot2:v2
+          docker tag trading-bot-app:latest tradebot.azurecr.io/trade-bot2:v2
           docker push tradebot.azurecr.io/trade-bot2:v2
 
