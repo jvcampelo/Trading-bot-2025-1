@@ -43,6 +43,7 @@ jobs:
           password: mdrqWf5eDtOyzUGOxA4w5/DfQ2Wl7qbjhxk4+auJVx+ACRBambwa
       
       - name: Build Docker image and Push
+        working-directory: ./trading-bot
         run: |
           docker-compose build
           docker tag trade-bot2:latest tradebot.azurecr.io/trade-bot2:v2
