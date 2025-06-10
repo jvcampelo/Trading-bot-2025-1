@@ -110,8 +110,8 @@ Interfaces que estendem `JpaRepository` para comunicação com o banco:
 - Armazenar variáveis sensíveis como API Keys de forma segura (por exemplo, Hashicorp Vault ou Secrets Manager).
 
 ---
-## 8. Url da api rodando na nuvem com swagger
- - https://tradebot-cjbef9c8e9ebcwhz.canadacentral-01.azurewebsites.net/swagger-ui/index.html
+## 8. Url da api no swagger rodando no azure com o container registry e web service
+ - https://ibmectrade-gxdegucrhmg4ctdj.eastus-01.azurewebsites.net//swagger-ui/index.html
 
 ## 9. integrantes 
  - João Campelo
